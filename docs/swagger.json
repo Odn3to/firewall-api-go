@@ -1,0 +1,170 @@
+{
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Gerencia e lida com o serviço Nftables",
+        "title": "Firewall - API - Go",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "172.23.58.10:8007",
+    "basePath": "/firewall",
+    "paths": {
+        "/firewall/apply": {
+            "post": {
+                "description": "Aplicas as regra para Nftables",
+                "summary": "Apply Regras - Nftables",
+                "operationId": "apply",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/regras.RetornoRequest"
+                        }
+                    }
+                }
+            }
+        },
+        "/firewall/newregra": {
+            "post": {
+                "description": "Criar regra para Nftables",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create Regra - Nftables",
+                "operationId": "createRegra",
+                "parameters": [
+                    {
+                        "description": "Regras",
+                        "name": "DataRegras",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/regras.DataRegras"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/regras.RetornoRequest"
+                        }
+                    }
+                }
+            }
+        },
+        "/firewall/regra/{id}": {
+            "put": {
+                "description": "Edita as regras",
+                "summary": "Edit Regras - Nftables",
+                "operationId": "editRegras",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id regra",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/regras.RetornoRequest"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleta as regras",
+                "summary": "Delete Regras - Nftables",
+                "operationId": "deleteRegras",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id regra",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/regras.RetornoRequest"
+                        }
+                    }
+                }
+            }
+        },
+        "/firewall/regras/": {
+            "get": {
+                "description": "Pega as regras",
+                "summary": "Get Regras - Nftables",
+                "operationId": "getRegras",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/regras.RetornoRequest"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "regras.DataRegras": {
+            "type": "object",
+            "properties": {
+                "acao": {
+                    "type": "string"
+                },
+                "destino": {
+                    "type": "string"
+                },
+                "nat": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "origem": {
+                    "type": "string"
+                },
+                "porta_destino": {
+                    "type": "string"
+                },
+                "porta_origem": {
+                    "type": "string"
+                },
+                "protocolo_destino": {
+                    "type": "string"
+                },
+                "protocolo_origem": {
+                    "type": "string"
+                }
+            }
+        },
+        "regras.RetornoRequest": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

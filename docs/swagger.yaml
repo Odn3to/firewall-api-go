@@ -1,0 +1,113 @@
+basePath: /firewall
+definitions:
+  regras.DataRegras:
+    properties:
+      acao:
+        type: string
+      destino:
+        type: string
+      nat:
+        type: string
+      nome:
+        type: string
+      origem:
+        type: string
+      porta_destino:
+        type: string
+      porta_origem:
+        type: string
+      protocolo_destino:
+        type: string
+      protocolo_origem:
+        type: string
+    type: object
+  regras.RetornoRequest:
+    properties:
+      data:
+        type: string
+      message:
+        type: string
+    type: object
+host: 172.23.58.10:8007
+info:
+  contact: {}
+  description: Gerencia e lida com o serviço Nftables
+  title: Firewall - API - Go
+  version: "1.0"
+paths:
+  /firewall/apply:
+    post:
+      description: Aplicas as regra para Nftables
+      operationId: apply
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/regras.RetornoRequest'
+      summary: Apply Regras - Nftables
+  /firewall/newregra:
+    post:
+      consumes:
+      - application/json
+      description: Criar regra para Nftables
+      operationId: createRegra
+      parameters:
+      - description: Regras
+        in: body
+        name: DataRegras
+        required: true
+        schema:
+          $ref: '#/definitions/regras.DataRegras'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/regras.RetornoRequest'
+      summary: Create Regra - Nftables
+  /firewall/regra/{id}:
+    delete:
+      description: Deleta as regras
+      operationId: deleteRegras
+      parameters:
+      - description: id regra
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/regras.RetornoRequest'
+      summary: Delete Regras - Nftables
+    put:
+      description: Edita as regras
+      operationId: editRegras
+      parameters:
+      - description: id regra
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/regras.RetornoRequest'
+      summary: Edit Regras - Nftables
+  /firewall/regras/:
+    get:
+      description: Pega as regras
+      operationId: getRegras
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/regras.RetornoRequest'
+      summary: Get Regras - Nftables
+schemes:
+- http
+- https
+swagger: "2.0"
